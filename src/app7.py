@@ -9,7 +9,7 @@
 # Cannot handle person duplicates; makes preferences a nested dict to handle?
 # NOTE: put the data functions into a class 
 
-
+#NOTE: I made these changes on test_branch
 """Usage:
 app.py (get-people | get-drinks)
 app.py menu
