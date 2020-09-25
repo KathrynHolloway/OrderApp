@@ -1,6 +1,5 @@
-# trying to get python to run the code using 
-# py -m app.py
-# ERROR: Relative module names not supported
+# Run the code from the root directory using:
+py -m src.app7
 
-# RUN ME: from week 1 
-# py -m Version_6.app6 menu
+# Requirements available in requirements.txt
+py -m pip install -r requirements.txt
