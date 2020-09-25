@@ -1,7 +1,7 @@
-import output.tables as t
-import classes.order as order
-import persistence.data_persistence as d
-from persistence.data_persistence import people_dict, drinks_dict, preferences_dict, DRINKS_FILE, PEOPLE_FILE
+import src.output.tables as t
+import src.classes.order as order
+import src.persistence.data_persistence as d
+from src.persistence.data_persistence import people_dict, drinks_dict, preferences_dict, DRINKS_FILE, PEOPLE_FILE
 # Input variables
 GET_PEOPLE = '1'
 GET_DRINKS = '2'

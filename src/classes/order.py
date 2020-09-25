@@ -2,8 +2,8 @@
 # OOP day one
 # 14/09/2020
 
-from output.tables import generate_table , print_table
-from persistence.data_persistence import preferences_dict
+from src.output.tables import generate_table , print_table
+from src.persistence.data_persistence import preferences_dict
 
 
 class Order:

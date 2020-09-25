@@ -1,5 +1,5 @@
 import unittest
-from output.tables import get_key_width
+from src.output.tables import get_key_width
 
 
 # Class that inherits from TestCase in 

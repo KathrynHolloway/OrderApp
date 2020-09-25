@@ -23,10 +23,10 @@ app.py -h | --help
 
 
 from docopt import docopt
-import output.tables as t
-import classes.order as order #NOTE: added 'as order' to fix referencing further down 
-import menu.cli as cli
-from persistence.data_persistence import people_dict, drinks_dict
+import src.output.tables as t
+import src.classes.order as order #NOTE: added 'as order' to fix referencing further down 
+import src.menu.cli as cli
+from src.persistence.data_persistence import people_dict, drinks_dict
 
 # Define the data
 

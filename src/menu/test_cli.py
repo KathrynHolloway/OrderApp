@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock, patch
 
-from menu.cli import print_menu 
-from menu.cli import (GET_PEOPLE, 
+from src.menu.cli import print_menu 
+from src.menu.cli import (GET_PEOPLE, 
 GET_DRINKS,
 GET_PREFERENCES, 
 GET_ORDER, 
@@ -11,7 +11,7 @@ ADD_DRINK,
 ADD_PREFERENCE,
 MAKE_ORDER, 
 EXIT)
-from menu.cli import add_person, add_drink
+from src.menu.cli import add_person, add_drink
 
 #NOTE: dpcs for unittest.mock 
 # https://docs.python.org/3/library/unittest.mock.html
