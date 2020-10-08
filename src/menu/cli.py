@@ -1,7 +1,9 @@
 import src.output.tables as t
 import src.classes.order as order
 import src.persistence.data_persistence as d
-from src.persistence.data_persistence import people_dict, drinks_dict, preferences_dict, DRINKS_FILE, PEOPLE_FILE
+from src.persistence.data_persistence import people_dict, preferences_dict, DRINKS_FILE, PEOPLE_FILE
+from src.data.db import MySQLDB, database, drinks_dict
+
 # Input variables
 GET_PEOPLE = '1'
 GET_DRINKS = '2'
@@ -121,6 +123,7 @@ def add_drink(drink, data):
         if len(data.keys()) != 0:
             new_key = max(data.keys()) +1
         data[new_key] = drink
+        database.save_drink(new_key, drink)
         print(f'New drink, {drink}, added to list of drinks.')
 
 # Save someone's preference

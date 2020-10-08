@@ -1,6 +1,6 @@
 # import pymysql
-# # from .env import mysql_pass
-# #NOTE: SQL playground database https://www.w3schools.com/sql/trysql.asp?filename=trysql_asc
+# from .env import mysql_pass
+#NOTE: SQL playground database https://www.w3schools.com/sql/trysql.asp?filename=trysql_asc
 
 # def main():
 #     connection = pymysql.connect(host = "localhost", port = 33066, user = "root", password = "password", db = "OrderApp" )
@@ -110,6 +110,16 @@ class MySQLDB:
     #             connection.commit()
     #     finally:
     #         connection.close()
+    def save_drink(self, drink_id, drink_name):
+        connection = self.__make_connection()
+        try:
+            with connection.cursor() as cursor:
+                data = [drink_id, drink_name]
+                sql = 'INSERT INTO drinks (drink_id, drink_name) VALUES (%s, %s)'
+                cursor.execute(sql, data)
+                connection.commit()
+        finally:
+            connection.close()
 
     # Load drinks - match input/output to save to file drinks function
     def load_drinks(self):
@@ -132,4 +142,5 @@ class MySQLDB:
 
 database = MySQLDB()
 
+drinks_dict = database.load_drinks()
 print(database.load_drinks())
