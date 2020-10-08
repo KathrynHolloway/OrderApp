@@ -4,7 +4,7 @@ from src.output.tables import get_key_width
 
 # Class that inherits from TestCase in 
 # the python standard library unittest
-
+#NOTE: add failure case for adding person - try to input bad input then check the right thing happens
 class Test_Methods(unittest.TestCase):
     # All tests must begin with test_
     
@@ -29,12 +29,7 @@ class Test_Methods(unittest.TestCase):
         # Assert
         self.assertEqual(expected, actual)
 
-
-
-    
-# #==============================================================================#
-
-
+#==============================================================================#
 
 if __name__ == '__main__':
     unittest.main()

@@ -45,6 +45,10 @@ class Test_cli(unittest.TestCase):
     [{ADD_PREFERENCE}] Save someone's favourite drink
     [{MAKE_ORDER}] Append to order
     [{EXIT}] Exit''')
+#TODO: I think the above is an incorrect use of assert_called_once_with 
+#TODO: what does this do? 
+#expected = [call('| TITLE')]
+#self.assertEqual(print_mock.call_args_list, expected)
 
     #===========================================================#
     def test_add_person(self):
