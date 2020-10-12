@@ -59,8 +59,8 @@ DRINKS_FILE = 'src/data/drinks.csv'
 PEOPLE_FILE = 'src/data/people.csv'
 PREFERENCES_FILE = 'src/data/preferences.csv'
 
-people_dict = Data(PEOPLE_FILE).read_file()
-drinks_dict = Data(DRINKS_FILE).read_file()
+# people_dict = Data(PEOPLE_FILE).read_file()
+# drinks_dict = Data(DRINKS_FILE).read_file()
 preferences_dict = Data(PREFERENCES_FILE).read_file()
 
 # drinks_dict = Data()

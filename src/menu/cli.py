@@ -1,8 +1,8 @@
 import src.output.tables as t
 import src.classes.order as order
 import src.persistence.data_persistence as d
-from src.persistence.data_persistence import people_dict, preferences_dict, DRINKS_FILE, PEOPLE_FILE
-from src.data.db import MySQLDB, database, drinks_dict
+from src.persistence.data_persistence import preferences_dict, DRINKS_FILE, PEOPLE_FILE
+from src.data.db import MySQLDB, database, drinks_dict, people_dict
 
 # Input variables
 GET_PEOPLE = '1'
@@ -33,22 +33,6 @@ def print_menu():
     user_input = str(input("Enter your selection: "))
     return user_input
 
-# Prompts user to add an order to the order
-
-# def get_order_menu():
-#     add_order = True
-#     while add_order:
-        # choice = input('Do you want to add to the order? y/n:')
-        # if choice=='y':
-        #     get_order(new_order, people_dict, drinks_dict, preferences_dict)        
-        # elif choice == 'n':
-        #     new_order.print_order()
-        #     add_order = False
-        # else:
-        #     # handle bad input
-        #     #TODO
-        #     continue
-    # return new_order
 
 def get_user_input():
     option = print_menu()
@@ -59,7 +43,7 @@ def get_user_input():
         print_drinks()
         wait()
     elif option == GET_PREFERENCES:
-        t.print_table(t.generate_table('preferences',preferences_dict))
+        t.print_table(t.generate_table('preferences',preferences_dict, "NAME"))
         wait()
     elif option == GET_ORDER:
         the_order.print_order()

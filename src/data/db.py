@@ -99,17 +99,36 @@ class MySQLDB:
     #         connection.close()
 
 
-    # def insert_drink(self, drink):
-    #     connection = self.__make_connection()
-    #     print('doing stuff')
-    #     try:
-    #         with connection.cursor() as cursor:
-    #             data = [str(drink.id), drink.name]
-    #             sql = 'INSERT INTO drink (id, name) VALUES (%s, %s)'
-    #             cursor.execute(sql, data)
-    #             connection.commit()
-    #     finally:
-    #         connection.close()
+    def save_person(self, person_id, person_name):
+        connection = self.__make_connection()
+        try:
+            with connection.cursor() as cursor:
+                data = [person_id, person_name]
+                sql = 'INSERT INTO people (person_id, person_name) VALUES (%s, %s)'
+                cursor.execute(sql, data)
+                connection.commit()
+        finally:
+            connection.close()
+
+    # Load drinks - match input/output to save to file drinks function
+    def load_people(self):
+        data = {}
+        connection = self.__make_connection()
+        try:
+            with connection.cursor() as cursor:
+                sql = 'SELECT * from people'
+                cursor.execute(sql)
+                while True:
+                    people_data = cursor.fetchone()
+                    if not people_data:
+                        break
+                    data[people_data[0]] = people_data[1]
+                connection.commit()
+        finally:
+            connection.close()
+        return data
+
+
     def save_drink(self, drink_id, drink_name):
         connection = self.__make_connection()
         try:
@@ -143,4 +162,4 @@ class MySQLDB:
 database = MySQLDB()
 
 drinks_dict = database.load_drinks()
-print(database.load_drinks())
+people_dict = database.load_people()

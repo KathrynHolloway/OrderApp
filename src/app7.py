@@ -26,19 +26,7 @@ from docopt import docopt
 import src.output.tables as t
 import src.classes.order as order #NOTE: added 'as order' to fix referencing further down 
 import src.menu.cli as cli
-from src.persistence.data_persistence import people_dict, drinks_dict
-
-# Define the data
-
-# Dictionaries 
-# people_dict = {1:"Emma",2:"Olivia",3:"Ava",4:"Isabella",5:"Sophia",6:"Charlotte",7:"Mia",8:"Kate"}
-# drinks_dict = {1:"Tea", 2:"Coffee",3:"Water",4:"Juice",5:"Beer",6:"Wine"}
-
-# preferences_dict = {"Kate":"Tea", "Emma":"Coffee", "Ava":"Juice", "Mia":"Water"}
-
-# Dictionary of valid arguments and their corresponding table 'header' and data
-# VALID_ARGS = {"get-people":['people',people_dict],"get-drinks":['drinks',drinks_dict]}
-
+from src.data.db import people_dict, drinks_dict
 
 # This is the root of the programs controls
 
