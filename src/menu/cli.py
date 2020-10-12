@@ -15,8 +15,8 @@ ADD_PREFERENCE = '7'
 MAKE_ORDER = '8'
 EXIT = '9'
 
-global new_order
-new_order = order.Order()
+global the_order
+the_order = order.Order()
 
 # Menu creation functions
 def print_menu():
@@ -35,19 +35,19 @@ def print_menu():
 
 # Prompts user to add an order to the order
 
-def get_order_menu():
-    add_order = True
-    while add_order:
-        choice = input('Do you want to add to the order? y/n:')
-        if choice=='y':
-            get_order(new_order)        
-        elif choice == 'n':
-            new_order.print_order()
-            add_order = False
-        else:
-            # handle bad input
-            #TODO
-            continue
+# def get_order_menu():
+#     add_order = True
+#     while add_order:
+        # choice = input('Do you want to add to the order? y/n:')
+        # if choice=='y':
+        #     get_order(new_order, people_dict, drinks_dict, preferences_dict)        
+        # elif choice == 'n':
+        #     new_order.print_order()
+        #     add_order = False
+        # else:
+        #     # handle bad input
+        #     #TODO
+        #     continue
     # return new_order
 
 def get_user_input():
@@ -56,13 +56,13 @@ def get_user_input():
         t.print_table(t.generate_table('people',people_dict))
         wait()
     elif option == GET_DRINKS:
-        t.print_table(t.generate_table('drinks',drinks_dict))
+        print_drinks()
         wait()
     elif option == GET_PREFERENCES:
         t.print_table(t.generate_table('preferences',preferences_dict))
         wait()
     elif option == GET_ORDER:
-        new_order.print_order()
+        the_order.print_order()
         wait()
     elif option == ADD_PERSON:
         name = get_name()
@@ -76,7 +76,8 @@ def get_user_input():
         add_preference()
         wait()
     elif option == MAKE_ORDER:
-        get_order_menu()
+        assign_order_owner(the_order)
+        get_order(the_order, people_dict, drinks_dict, preferences_dict)
         wait()
     elif option == EXIT:
         if d.Data(DRINKS_FILE).save_data(drinks_dict) and d.Data(PEOPLE_FILE).save_data(people_dict):
@@ -191,20 +192,62 @@ def get_name_key():
 
 # Get drink by key
 def get_drink_key():
-    key = input('Please enter the corresponding key of the DRINK you would like to add as a favourite: ')
+    key = input('Please enter the corresponding key of the DRINK you would like to choose: ')
     while (not key.isnumeric() ) or (not int(key) in drinks_dict):
         if not key.isnumeric():
-            key = input('''Your input must be a number.\nPlease enter the corresponding key of the DRINK you would like to save as a favourite: ''')
+            key = input('''Your input must be a number.\nPlease enter the corresponding key of the DRINK you would like to choose: ''')
         else:
              key = input('Please enter a key that exists:')
     return int(key)
 
 # Get someones order
 
-def get_order(the_order):
-    name = input('Please input the name of the person wanting to place an order:')
-    drink = input(f'Enter the drink {name} wants or press ENTER if {name} wants their favourite:')
-    if drink == '':
-        drink = None
-    the_order.add_to_order(name.title(),drink)
-    
+def get_order(the_order, people_dict, drinks_dict, preferences_dict):
+    # Loops through people
+    # If they have a preference, check if hey want that
+    # Otherwise ask what drink they want
+    for name in people_dict.values():
+        while True:
+            # Do they want a drink?
+            choice = input(f'Does {name} want a drink? y/n:')
+            if choice=='y':
+                drink = get_drink_order(name,preferences_dict, drinks_dict)
+                the_order.add_to_order(name, drink)
+                break     
+            elif choice == 'n':
+                break
+            else:
+                # handle bad input
+                #TODO
+                continue
+    the_order.print_order()
+
+
+# Create an order
+def assign_order_owner(the_order):
+    owner = input('Please input the name of the person making this round:')
+    the_order.set_owner(owner)
+
+# Asks the user what drink someone wants
+def get_drink_order(name, preferences, drinks_dict):
+    if name in preferences.keys():
+        while True:
+            choice = input(f'Does {name} want their preference {preferences[name]}? y/n:')
+            if choice=='y':
+                return preferences[name]       
+            elif choice == 'n':
+                print_drinks()
+                drink_key = get_drink_key()
+                return drinks_dict[drink_key]
+            else:
+                continue
+                #TODO
+                # handle bad input
+    else:
+        print_drinks()
+        drink_key = get_drink_key()
+        return drinks_dict[drink_key]
+
+
+def print_drinks():
+    t.print_table(t.generate_table('drinks',drinks_dict))

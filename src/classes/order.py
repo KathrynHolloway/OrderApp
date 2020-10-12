@@ -9,6 +9,7 @@ from src.persistence.data_persistence import preferences_dict
 class Order:
     def __init__(self):
         self.order = {}
+        self.owner = None
 
     def add_to_order(self, name, drink=None):
         # Add a person from people_dict and their drink order from drinks_dict
@@ -20,9 +21,12 @@ class Order:
         else:
             print(f'Could not take order.\nYou did not input a drink and a preference is not saved for {name}.')
 
-
+    def set_owner(self,owner):
+        self.owner = owner
+        
     def print_order(self):
         print_table(generate_table('Order',self.order))
+
 
 
 # drink_round = Order()
