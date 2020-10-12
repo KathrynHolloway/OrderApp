@@ -25,7 +25,9 @@ class Order:
         self.owner = owner
         
     def print_order(self):
-        print_table(generate_table('Order',self.order))
+        if self.owner:
+            print(f'{self.owner}\'s round:')
+        print_table(generate_table('Order',self.order,'NAME'))
 
 
 

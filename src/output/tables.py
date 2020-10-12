@@ -24,25 +24,28 @@ def add_breakline(width,key_width, table_list):
     # Handle key_width = 0 when table empty
     if key_width == 0:
         key_width = 1
-    table_list.append(f"+{(key_width +2)*'='}+{(width)*'='}+")
+    table_list.append(f"+{(key_width +3)*'='}+{(width)*'='}+")
     return table_list
 
 # Prints a header for the table
 def add_header(header,width,key_width, table_list,header2 = 'KEY'):
     table_list = add_breakline(width,key_width,table_list)
-    table_list.append(f'|{header2}{SPACER * (key_width - len(header2)+2)}|{header.upper()}{SPACER * (width - len(header))}|')
+    table_list.append(f'|{header2}{SPACER * (key_width - len(header2)+3)}|{header.upper()}{SPACER * (width - len(header))}|')
     table_list = add_breakline(width,key_width,table_list)
     return table_list
 
 # Generates the table were each element in the list is a line in the table
 
-def generate_table(header, data):
+def generate_table(header, data, header2=None):
     table_list = []
     width = get_table_width(header,data)
     key_width = get_key_width(data)
-    table_list = add_header(header,width,key_width,table_list)
+    if header2 == None:
+        table_list = add_header(header,width,key_width,table_list)
+    else:
+        table_list = add_header(header,width,key_width,table_list,header2)
     for key,item in data.items():
-        table_list.append(f'| {key} {SPACER * (key_width - len(str(key)))}|{item}{SPACER * (width - len(item))}|')
+        table_list.append(f'| {key} {SPACER * (key_width - len(str(key))+1)}|{item}{SPACER * (width - len(item))}|')
     table_list = add_breakline(width,key_width,table_list)
     return table_list
 
