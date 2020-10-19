@@ -49,7 +49,7 @@ class MySQLDB:
         finally:
             connection.close()
 
-    # Load drinks - match input/output to save to file drinks function
+    # Load drinks
     def load_people(self):
         data = {}
         connection = self.__make_connection()
@@ -77,9 +77,9 @@ class MySQLDB:
                 cursor.execute(sql, data)
                 connection.commit()
         finally:
-            connection.close()
+            connection.close()  
 
-    # Load drinks - match input/output to save to file drinks function
+    # Load drinks
     def load_drinks(self):
         data = {}
         connection = self.__make_connection()
